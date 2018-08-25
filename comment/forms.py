@@ -8,6 +8,7 @@ from .models import Comment
 class CommentForm(forms.Form):
     content_type = forms.CharField(widget=forms.HiddenInput)
     object_id = forms.IntegerField(widget=forms.HiddenInput)
+    # error_messages - 覆盖默认值的可选字典
     text = forms.CharField(widget=CKEditorWidget(config_name='comment_ckeditor'),
                            error_messages={'required': '评论内容不能为空'})
     reply_comment_id = forms.IntegerField(widget=forms.HiddenInput(attrs={'id': 'reply_comment_id'}))
@@ -47,5 +48,6 @@ class CommentForm(forms.Form):
         else:
             raise forms.ValidationError('回复出错')
         return reply_comment_id
+
 
 
